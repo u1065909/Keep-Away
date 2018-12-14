@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class PlayerNewLevelManager : MonoBehaviour {
 
-    public bool initialized_Move;
-    public bool initialized_Jump;
+    [HideInInspector()]
+    public bool initialized_Move, initialized_Jump, initialized_Aim, initialized_Player, initialized_PlayerInteraction;
 
     // Use this for initialization
     void Start ()
@@ -29,7 +29,10 @@ public class PlayerNewLevelManager : MonoBehaviour {
     void InitializePlayerValues(Scene scene, LoadSceneMode mode)
     {
         initialized_Move = false;
-        initialized_Jump = false; 
+        initialized_Jump = false;
+        initialized_Aim = false;
+        initialized_Player = false;
+        initialized_PlayerInteraction = false;
     }
     void OnDisable()
     {

@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
     PlayerNewLevelManager pm;
     Rigidbody2D rb;
     JumpController jumpController;
-	
+    Player player;
 	// Update is called once per frame
 	void Update ()
     {
@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour {
             pm.initialized_Move = true;
             rb = GetComponent<Rigidbody2D>();
             jumpController = GetComponent<JumpController>();
+            player = GetComponent<Player>();
         }
     }
 

@@ -70,7 +70,7 @@ public class JumpController : MonoBehaviour {
                 }
                 else
                 {
-                    playerController.facingRight = true; ;
+                    playerController.facingRight = true; 
                     rb.AddForce(new Vector3(wallJumpForce, jumpForce), ForceMode2D.Impulse);
                 }
                 StartCoroutine(WallJumpTimerStart());
