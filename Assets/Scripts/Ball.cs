@@ -22,6 +22,7 @@ public class Ball : MonoBehaviour {
     {
         rb.gravityScale = originalGravity;
         GetComponent<CircleCollider2D>().enabled = true;
+        
     }
     public void GotOwner()
     {
@@ -38,7 +39,7 @@ public class Ball : MonoBehaviour {
     {
         while (target.gameObject.GetComponent<Player>().hasBall)
         {
-            transform.position = new Vector3(target.position.x, target.position.y + 1.5f);
+            transform.position = new Vector3(target.position.x, target.position.y + 1.1f);
             yield return new WaitForEndOfFrame();
         }
     }
