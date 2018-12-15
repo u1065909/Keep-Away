@@ -6,20 +6,20 @@ public class AimController : MonoBehaviour {
 
     public int playerNum = 1;
     public Vector3 dir;
-    public Rigidbody2D rbTest;
     public float deadSpotTimer;
     public float IgnoreBallPlayerCollisionTime = .5f;
+    public Transform arrow;
     PlayerNewLevelManager pm;
     Player player;
     public Ball ball;
     bool canChangeDir = true;
-
+    float timeCount = 0;
     
 
     // Use this for initialization
     void Start ()
     {
-        rbTest = GetComponent<Rigidbody2D>();
+        
 	}
 	
 	// Update is called once per frame
@@ -41,6 +41,13 @@ public class AimController : MonoBehaviour {
             {
                 dir = tempDir.normalized;
                 StartCoroutine(WaitForDeadSpot());
+                
+                /*
+                Quaternion lookRotation = Quaternion.LookRotation(Vector3.forward,dir);
+                arrow.rotation = Quaternion.Slerp(arrow.rotation, lookRotation, timeCount);
+                timeCount = timeCount + Time.deltaTime;
+                */
+                arrow.rotation = Quaternion.LookRotation(Vector3.forward,dir );
             }
         }
     }
@@ -58,8 +65,9 @@ public class AimController : MonoBehaviour {
 
     private void Fire()
     {
-        if (Input.GetButtonDown("Fire_P" + playerNum) && player.hasBall)
+        if (Input.GetButton("Fire_P" + playerNum) && player.hasBall)
         {
+            arrow.GetComponent<SpriteRenderer>().enabled = true;
         }
         if (Input.GetButtonUp("Fire_P" + playerNum) && player.hasBall)
         {
@@ -67,6 +75,7 @@ public class AimController : MonoBehaviour {
             ball.GetComponent<Ball>().Free();
             ball.GetComponent<Rigidbody2D>().AddForce(dir * player.throwPower);
             StartCoroutine(WaitForNoIgnore());
+            arrow.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
     IEnumerator WaitForNoIgnore()
