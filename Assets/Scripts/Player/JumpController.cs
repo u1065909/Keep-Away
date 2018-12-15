@@ -7,6 +7,7 @@ public class JumpController : MonoBehaviour {
 
     public float jumpForce = 10;
     public float wallJumpForce = 10;
+    public float groundCheckSize = 1;
     /// <summary>
     /// Starts when player wall jumps and prevents player moving a specified amount of time after
     /// </summary>
@@ -23,7 +24,8 @@ public class JumpController : MonoBehaviour {
 	void Update ()
     {
         InitializeValues();
-        isGrounded = Physics2D.Linecast(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - .1f), 1 << LayerMask.NameToLayer("Ground"));
+        //isGrounded = Physics2D.Linecast(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - .1f), 1 << LayerMask.NameToLayer("Ground"));
+        isGrounded = Physics2D.OverlapBox(groundCheck.position, new Vector2(groundCheckSize, .1f), 0, 1 << LayerMask.NameToLayer("Ground"));
         WallJump();
         Jump();
         

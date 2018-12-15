@@ -30,18 +30,26 @@ public class PlayerInteraction : MonoBehaviour {
             pm.initialized_PlayerInteraction = true;
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print(collision.gameObject.tag);
-        if(collision.gameObject.tag == "Ball")
+        if(collision.gameObject.tag == "Ball" && !player.hasThrowableItem)
         {
             GrabBall(collision.gameObject);
         }
+        else if(collision.gameObject.tag == "Item" && !player.hasThrowableItem)
+        {
+            GrabItem(collision.gameObject);
+        }
     }
 
+    private void GrabItem(GameObject item)
+    {
+        player.hasThrowableItem = true;
+    }
     private void GrabBall(GameObject ball)
     {
-        player.hasBall = true;
+        player.hasThrowableItem = true;
         ball.GetComponent<Ball>().GotOwner();
         ball.GetComponent<Ball>().FollowPlayer(transform);
     }

@@ -8,6 +8,7 @@ public class AimController : MonoBehaviour {
     public Vector3 dir;
     public float deadSpotTimer;
     public float IgnoreBallPlayerCollisionTime = .5f;
+    public BoxCollider2D hitBox;
     public Transform arrow;
     PlayerNewLevelManager pm;
     Player player;
@@ -32,7 +33,7 @@ public class AimController : MonoBehaviour {
 	}
     private void Aim()
     {
-        if (canChangeDir&& player.hasBall)
+        if (canChangeDir&& player.hasThrowableItem)
         {
             float horz = Input.GetAxisRaw("Horizontal_Right_Stick_P" + playerNum);
             float vert = Input.GetAxisRaw("Vertical_Right_Stick_P" + playerNum);
@@ -65,13 +66,13 @@ public class AimController : MonoBehaviour {
 
     private void Fire()
     {
-        if (Input.GetButton("Fire_P" + playerNum) && player.hasBall)
+        if (Input.GetButton("Fire_P" + playerNum) && player.hasThrowableItem)
         {
             arrow.GetComponent<SpriteRenderer>().enabled = true;
         }
-        if (Input.GetButtonUp("Fire_P" + playerNum) && player.hasBall)
+        if (Input.GetButtonUp("Fire_P" + playerNum) && player.hasThrowableItem)
         {
-            player.hasBall = false;
+            player.hasThrowableItem = false;
             ball.GetComponent<Ball>().Free();
             ball.GetComponent<Rigidbody2D>().AddForce(dir * player.throwPower);
             StartCoroutine(WaitForNoIgnore());
@@ -80,9 +81,11 @@ public class AimController : MonoBehaviour {
     }
     IEnumerator WaitForNoIgnore()
     {
+        hitBox.enabled = false;
         Physics2D.IgnoreLayerCollision(ball.gameObject.layer, gameObject.layer);
         yield return new WaitForSeconds(IgnoreBallPlayerCollisionTime);
         Physics2D.IgnoreLayerCollision(ball.gameObject.layer, gameObject.layer, false);
+        hitBox.enabled = true;
     }
     private void InitializeValues()
     {

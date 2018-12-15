@@ -5,7 +5,8 @@ using UnityEngine;
 public class Team : MonoBehaviour {
 
     public Color color;
-    public float score;
+    public float keepAwayScore;
+    public bool hasPosession;
 	// Use this for initialization
 	void Start () {
 		
