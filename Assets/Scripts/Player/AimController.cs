@@ -73,8 +73,9 @@ public class AimController : MonoBehaviour {
         if (Input.GetButtonUp("Fire_P" + playerNum) && player.hasThrowableItem)
         {
             player.hasThrowableItem = false;
-            ball.GetComponent<Ball>().Free();
-            ball.GetComponent<Rigidbody2D>().AddForce(dir * player.throwPower);
+            player.obtainedItem.GetComponent<Ball>().Free();
+            player.obtainedItem.GetComponent<Rigidbody2D>().AddForce(dir * player.throwPower);
+            player.obtainedItem = null;
             StartCoroutine(WaitForNoIgnore());
             arrow.GetComponent<SpriteRenderer>().enabled = false;
         }

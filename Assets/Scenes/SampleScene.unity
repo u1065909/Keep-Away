@@ -1166,7 +1166,7 @@ MonoBehaviour:
   hasBall: 0
   canMove: 1
   isHitable: 1
-  hasItem: 0
+  obtainedItem: {fileID: 0}
   playerHealth: 5
   playerNum: 1
   timesHitTilStunned: 5

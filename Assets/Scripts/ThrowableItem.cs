@@ -8,6 +8,7 @@ public abstract class ThrowableItem : MonoBehaviour
     Rigidbody2D rb;
     float originalGravity;
     public bool isObtained;
+    
     // Use this for initialization
     void Start()
     {
@@ -38,7 +39,7 @@ public abstract class ThrowableItem : MonoBehaviour
     }
     IEnumerator Follow(Transform target)
     {
-        while (target.gameObject.GetComponent<Player>().hasThrowableItem)
+        while (isObtained)
         {
             transform.position = new Vector3(target.position.x, target.position.y + 1.1f);
             yield return new WaitForEndOfFrame();

@@ -8,7 +8,7 @@ public class Player : MonoBehaviour {
     public bool hasBall = false;
     public bool canMove = true;
     public bool isHitable = true;
-    public bool hasItem = false;
+    public GameObject obtainedItem;
     public int playerHealth = 5;
     public int playerNum = 1;
     public int timesHitTilStunned = 5;

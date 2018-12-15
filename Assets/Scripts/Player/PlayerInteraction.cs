@@ -35,7 +35,8 @@ public class PlayerInteraction : MonoBehaviour {
     {
         if(collision.gameObject.tag == "Ball" && !player.hasThrowableItem)
         {
-            GrabBall(collision.gameObject);
+            GrabItem(collision.gameObject);
+            player.obtainedItem = collision.gameObject;
         }
         else if(collision.gameObject.tag == "Item" && !player.hasThrowableItem)
         {
@@ -43,14 +44,11 @@ public class PlayerInteraction : MonoBehaviour {
         }
     }
 
+    
     private void GrabItem(GameObject item)
     {
         player.hasThrowableItem = true;
-    }
-    private void GrabBall(GameObject ball)
-    {
-        player.hasThrowableItem = true;
-        ball.GetComponent<Ball>().GotOwner();
-        ball.GetComponent<Ball>().FollowPlayer(transform);
+        item.GetComponent<ThrowableItem>().GotOwner();
+        item.GetComponent<ThrowableItem>().FollowPlayer(transform);
     }
 }

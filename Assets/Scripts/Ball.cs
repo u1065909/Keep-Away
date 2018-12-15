@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Ball : ThrowableItem
 {
-
+    public Item item;
     void Update()
     {
+        
         if (isObtained)
         {
             GetComponent<CircleCollider2D>().enabled = false;
