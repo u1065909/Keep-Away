@@ -6,10 +6,11 @@ public class PlayerInteraction : MonoBehaviour {
 
     Player player;
     PlayerNewLevelManager pm;
+    GameObject[] players;
 	// Use this for initialization
 	void Start ()
     {
-		
+        
 	}
 	
 	// Update is called once per frame
@@ -28,25 +29,34 @@ public class PlayerInteraction : MonoBehaviour {
         {
             player = GetComponent<Player>();
             pm.initialized_PlayerInteraction = true;
+            players = GameObject.FindGameObjectsWithTag("Player");
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Ball" && !player.hasThrowableItem)
+        if(collision.gameObject.tag == "Item" && !player.hasThrowableItem)
         {
             GrabItem(collision.gameObject);
             player.obtainedItem = collision.gameObject;
-        }
-        else if(collision.gameObject.tag == "Item" && !player.hasThrowableItem)
-        {
-            GrabItem(collision.gameObject);
         }
     }
 
     
     private void GrabItem(GameObject item)
     {
+        if (item.GetComponent<ThrowableItem>().item.isBall)
+        {
+            foreach(GameObject p in players)
+            {
+                Player otherPlayer = p.GetComponent<Player>();
+                if(otherPlayer.playerNum != player.playerNum)
+                {
+                    otherPlayer.hasBall = false;
+                }
+            }
+            player.hasBall = true;
+        }
         player.hasThrowableItem = true;
         item.GetComponent<ThrowableItem>().GotOwner();
         item.GetComponent<ThrowableItem>().FollowPlayer(transform);

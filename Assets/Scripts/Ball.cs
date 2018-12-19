@@ -4,17 +4,28 @@ using UnityEngine;
 
 public class Ball : ThrowableItem
 {
-    public Item item;
+    
+    private void Start()
+    {
+        item.name = "Ball";
+        item.isBall = true;
+    }
     void Update()
     {
-        
         if (isObtained)
         {
-            GetComponent<CircleCollider2D>().enabled = false;
+            foreach (Collider2D c in GetComponents<Collider2D>())
+            {
+                c.enabled = false;
+            }
         }
         else
         {
-            GetComponent<CircleCollider2D>().enabled = true;
+            foreach (Collider2D c in GetComponents<Collider2D>())
+            {
+                c.enabled = true;
+            }
+
         }
     }
 

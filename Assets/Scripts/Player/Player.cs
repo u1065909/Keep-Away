@@ -16,11 +16,18 @@ public class Player : MonoBehaviour {
     public float throwPower;
     public float timeToRecover, timeToRecoverMovement;
     public float timeKnockedOut;
+    RuleManager ruleManager;
     int timesHit = 0;
+    Rigidbody2D rb;
 	// Use this for initialization
 	void Start ()
     {
-		
+        print(playerNum);
+        ruleManager = GameObject.Find("RuleManager").GetComponent<RuleManager>();
+        rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = ruleManager.rules.playerGravity;
+        timesHitTilStunned = ruleManager.rules.timesHitTilStunned;
+        timeKnockedOut = ruleManager.rules.timeKnockedOut;
 	}
 	
 	// Update is called once per frame
@@ -59,7 +66,8 @@ public class Player : MonoBehaviour {
                 timesHit = 0;
             return;
         }
-        if(timesHit == timesHitTilStunned)
+
+        if(timesHit >= timesHitTilStunned)
         {
             StartCoroutine(Recover(timeKnockedOut, timeKnockedOut));
             timesHit = 0;

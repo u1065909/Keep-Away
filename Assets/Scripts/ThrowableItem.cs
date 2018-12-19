@@ -4,21 +4,21 @@ using UnityEngine;
 
 public abstract class ThrowableItem : MonoBehaviour
 {
-    
+    public Item item;
+    public bool isObtained;
+
     Rigidbody2D rb;
     float originalGravity;
-    public bool isObtained;
-    
+    GameObject owner;
     // Use this for initialization
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        originalGravity = rb.gravityScale;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
     }
 
     public void Free()
@@ -29,6 +29,11 @@ public abstract class ThrowableItem : MonoBehaviour
     }
     public void GotOwner()
     {
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody2D>();
+            originalGravity = rb.gravityScale;
+        }
         isObtained = true;
         rb.velocity = new Vector3(0, 0, 0);
         rb.gravityScale = 0;
@@ -36,6 +41,7 @@ public abstract class ThrowableItem : MonoBehaviour
     public void FollowPlayer(Transform target)
     {
         StartCoroutine(Follow(target));
+        owner = target.gameObject;
     }
     IEnumerator Follow(Transform target)
     {

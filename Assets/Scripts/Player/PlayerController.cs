@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float speed = 10;
-    public int playerNum = 1;
     public float wallCheckOffset;
     public bool isTouchingWall { get; private set; }
     
@@ -71,7 +70,7 @@ public class PlayerController : MonoBehaviour {
     /// </summary>
     private void Move()
     {
-        float move = Input.GetAxis("Horizontal_Left_Stick_P" + playerNum);
+        float move = Input.GetAxis("Horizontal_Left_Stick_P" + player.playerNum);
         if (move > 0)
         {
             rb.velocity = new Vector3(0, rb.velocity.y);

@@ -13,12 +13,12 @@ public class JumpController : MonoBehaviour {
     /// </summary>
     public float wallJumpTimer;
     bool isGrounded;
-    public int playerNum = 1;
     public string JumpButton = "Jump_P";
     PlayerNewLevelManager pm;
     Rigidbody2D rb;
     Transform groundCheck;
     PlayerController playerController;
+    Player player;
     	
 	// Update is called once per frame
 	void Update ()
@@ -28,6 +28,7 @@ public class JumpController : MonoBehaviour {
         isGrounded = Physics2D.OverlapBox(groundCheck.position, new Vector2(groundCheckSize, .1f), 0, 1 << LayerMask.NameToLayer("Ground"));
         WallJump();
         Jump();
+        
         
     }
 
@@ -46,12 +47,13 @@ public class JumpController : MonoBehaviour {
             groundCheck = transform.Find("Ground Check");
             pm.initialized_Jump = true;
             playerController = GetComponent<PlayerController>();
+            player = GetComponent<Player>();
             
         }
     }
     private void Jump()
     {
-        if (Input.GetButtonDown(JumpButton + playerNum) && isGrounded)
+        if (Input.GetButtonDown(JumpButton + player.playerNum) && isGrounded)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0);
             rb.AddForce(new Vector3(0, jumpForce), ForceMode2D.Impulse);
@@ -62,7 +64,7 @@ public class JumpController : MonoBehaviour {
     {
         if (playerController.isTouchingWall && !isGrounded)
         {
-            if (Input.GetButtonDown(JumpButton + playerNum))
+            if (Input.GetButtonDown(JumpButton + player.playerNum))
             {
                 rb.velocity = new Vector3(rb.velocity.x, 0);
                 if (playerController.facingRight)

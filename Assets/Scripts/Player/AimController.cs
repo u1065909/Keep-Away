@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AimController : MonoBehaviour {
 
-    public int playerNum = 1;
+    
     public Vector3 dir;
     public float deadSpotTimer;
     public float IgnoreBallPlayerCollisionTime = .5f;
@@ -15,13 +15,6 @@ public class AimController : MonoBehaviour {
     public Ball ball;
     bool canChangeDir = true;
     float timeCount = 0;
-    
-
-    // Use this for initialization
-    void Start ()
-    {
-        
-	}
 	
 	// Update is called once per frame
 	void Update ()
@@ -31,12 +24,16 @@ public class AimController : MonoBehaviour {
         Aim();
         Fire();
 	}
+
+    /// <summary>
+    /// Aim in the direction of the right stick on a controller
+    /// </summary>
     private void Aim()
     {
         if (canChangeDir&& player.hasThrowableItem)
         {
-            float horz = Input.GetAxisRaw("Horizontal_Right_Stick_P" + playerNum);
-            float vert = Input.GetAxisRaw("Vertical_Right_Stick_P" + playerNum);
+            float horz = Input.GetAxisRaw("Horizontal_Right_Stick_P" + player.playerNum);
+            float vert = Input.GetAxisRaw("Vertical_Right_Stick_P" + player.playerNum);
             Vector3 tempDir = new Vector3(horz, vert);
             if (horz != 0 || vert != 0)
             {
@@ -66,14 +63,14 @@ public class AimController : MonoBehaviour {
 
     private void Fire()
     {
-        if (Input.GetButton("Fire_P" + playerNum) && player.hasThrowableItem)
+        if (Input.GetButton("Fire_P" + player.playerNum) && player.hasThrowableItem)
         {
             arrow.GetComponent<SpriteRenderer>().enabled = true;
         }
-        if (Input.GetButtonUp("Fire_P" + playerNum) && player.hasThrowableItem)
+        if (Input.GetButtonUp("Fire_P" + player.playerNum) && player.hasThrowableItem)
         {
             player.hasThrowableItem = false;
-            player.obtainedItem.GetComponent<Ball>().Free();
+            player.obtainedItem.GetComponent<ThrowableItem>().Free();
             player.obtainedItem.GetComponent<Rigidbody2D>().AddForce(dir * player.throwPower);
             player.obtainedItem = null;
             StartCoroutine(WaitForNoIgnore());

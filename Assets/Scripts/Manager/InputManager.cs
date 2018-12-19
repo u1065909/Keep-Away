@@ -14,7 +14,7 @@ public class InputManager : MonoBehaviour {
 	void Update ()
     {
         string[] names = Input.GetJoystickNames();
-        
+
         foreach(string t in names)
         {
             if(t =="Wireless Controller")
