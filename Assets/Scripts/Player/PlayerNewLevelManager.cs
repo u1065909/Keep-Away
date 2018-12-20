@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class PlayerNewLevelManager : MonoBehaviour {
 
     [HideInInspector()]
-    public bool initialized_Move, initialized_Jump, initialized_Aim, initialized_Player, initialized_PlayerInteraction;
+    public bool initialized_Move, initialized_Jump, initialized_Aim, initialized_Player, initialized_PlayerInteraction, initialized_Attack;
 
     // Use this for initialization
     void Start ()
@@ -33,6 +33,7 @@ public class PlayerNewLevelManager : MonoBehaviour {
         initialized_Aim = false;
         initialized_Player = false;
         initialized_PlayerInteraction = false;
+        initialized_Attack = false;
     }
     void OnDisable()
     {

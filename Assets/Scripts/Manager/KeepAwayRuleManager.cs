@@ -88,7 +88,6 @@ public class KeepAwayRuleManager : MonoBehaviour {
 
             Team team;
             teams.TryGetValue(playerThatHasPosession.team.teamName, out team);
-            print(team);
             scoreManager.GivePoints(team, ruleManager.rules.scorePerPosession);
             yield return new WaitForSeconds(ruleManager.rules.timePerScore);
 

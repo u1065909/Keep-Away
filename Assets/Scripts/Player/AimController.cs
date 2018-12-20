@@ -8,6 +8,7 @@ public class AimController : MonoBehaviour {
     public Vector3 dir;
     public float deadSpotTimer;
     public float IgnoreBallPlayerCollisionTime = .5f;
+    
     public BoxCollider2D hitBox;
     public Transform arrow;
     PlayerNewLevelManager pm;
@@ -23,6 +24,7 @@ public class AimController : MonoBehaviour {
 
         Aim();
         Fire();
+        
 	}
 
     /// <summary>
