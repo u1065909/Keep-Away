@@ -8,6 +8,7 @@ public class JumpController : MonoBehaviour {
     public float jumpForce = 10;
     public float wallJumpForce = 10;
     public float groundCheckSize = 1;
+    public Transform groundCheck;
     /// <summary>
     /// Starts when player wall jumps and prevents player moving a specified amount of time after
     /// </summary>
@@ -16,7 +17,6 @@ public class JumpController : MonoBehaviour {
     public string JumpButton = "Jump_P";
     PlayerNewLevelManager pm;
     Rigidbody2D rb;
-    Transform groundCheck;
     PlayerController playerController;
     Player player;
     	
@@ -69,11 +69,13 @@ public class JumpController : MonoBehaviour {
                 rb.velocity = new Vector3(rb.velocity.x, 0);
                 if (playerController.facingRight)
                 {
+                    //print("RightWall");
                     playerController.facingRight = false;
                     rb.AddForce(new Vector3(-wallJumpForce, jumpForce), ForceMode2D.Impulse);
                 }
                 else
                 {
+                    //print("LeftWall");
                     playerController.facingRight = true; 
                     rb.AddForce(new Vector3(wallJumpForce, jumpForce), ForceMode2D.Impulse);
                 }

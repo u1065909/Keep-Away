@@ -78,12 +78,14 @@ public class Player : MonoBehaviour {
     public void GotHit(float timeStunned)
     {
         print("outch");
+        print(this);
         hasBall = false;
         hasThrowableItem = false;
         if(obtainedItem != null)
         {
             StartCoroutine(WaitForNoIgnoreOnHit());
             obtainedItem.GetComponent<ThrowableItem>().Free();
+            obtainedItem = null;
         }
         timesHit++;
         if (timeStunned != 0)
