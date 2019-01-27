@@ -27,7 +27,7 @@ public class ScoreManager : MonoBehaviour {
 	}
 
     /// <summary>
-    /// From Least To Greatest
+    /// From Greatest To Least
     /// </summary>
     /// <param name="teams"></param>
     public void OrganizeTeamsByScore(List<Team> teams)

@@ -39,7 +39,6 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		
 	}
     //Disable player movement then enables player movement
     IEnumerator RecoverMovement(float timeToRecoverMovement)
