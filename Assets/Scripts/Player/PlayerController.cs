@@ -71,7 +71,6 @@ public class PlayerController : MonoBehaviour {
     private void Move()
     {
         float move = Input.GetAxis("Horizontal_Left_Stick_P" + player.playerNum);
-        print(facingRight);
         if (move > 0)
         {
             rb.velocity = new Vector3(0, rb.velocity.y);

@@ -16,6 +16,8 @@ public class Player : MonoBehaviour {
     public float throwPower;
     public float timeToRecover, timeToRecoverMovement;
     public float timeKnockedOut;
+    //Name of event that the player is being affected by
+    public string currentEvent;
     //Amount of time for player to ignore item they just lost 
     public float IgnoreItemPlayerCollisionTime;
     //For Player Touching the ball

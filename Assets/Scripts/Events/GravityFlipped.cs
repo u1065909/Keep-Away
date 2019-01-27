@@ -8,6 +8,7 @@ public class GravityFlipped : Events {
 	// Use this for initialization
 	void Start ()
     {
+        eventName = "GravityFlipped";
         players = GameObject.FindGameObjectsWithTag("Player");
 	}
 
@@ -20,6 +21,7 @@ public class GravityFlipped : Events {
             player.GetComponent<Rigidbody2D>().gravityScale = -1 * player.GetComponent<Rigidbody2D>().gravityScale;
             jump.jumpForce = jump.jumpForce * -1;
             jump.groundCheck.localPosition = new Vector3(jump.groundCheck.localPosition.x, -1 * jump.groundCheck.localPosition.y, jump.groundCheck.localPosition.z);
+            player.GetComponent<Player>().currentEvent = eventName;
         }
     }
 
@@ -31,6 +33,7 @@ public class GravityFlipped : Events {
             player.GetComponent<Rigidbody2D>().gravityScale = -1 * player.GetComponent<Rigidbody2D>().gravityScale;
             jump.jumpForce = jump.jumpForce * -1;
             jump.groundCheck.localPosition = new Vector3(jump.groundCheck.localPosition.x, -1 * jump.groundCheck.localPosition.y, jump.groundCheck.localPosition.z);
+            player.GetComponent<Player>().currentEvent = "";
         }
     }
 

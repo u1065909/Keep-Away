@@ -6,7 +6,7 @@ public abstract class ThrowableItem : MonoBehaviour
 {
     public Item item;
     public bool isObtained;
-
+    public float offsetFromPlayer;
     Rigidbody2D rb;
     float originalGravity;
     GameObject owner;
@@ -47,7 +47,15 @@ public abstract class ThrowableItem : MonoBehaviour
     {
         while (isObtained)
         {
-            transform.position = new Vector3(target.position.x, target.position.y + 1.1f);
+            if(target.GetComponent<Player>().currentEvent == "GravityFlipped")
+            {
+                offsetFromPlayer = -1.1f;
+            }
+            else
+            {
+                offsetFromPlayer = 1.1f;
+            }
+            transform.position = new Vector3(target.position.x, target.position.y + offsetFromPlayer);
             yield return new WaitForEndOfFrame();
         }
     }
