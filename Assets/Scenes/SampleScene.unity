@@ -2491,10 +2491,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d3e38220fcdfd3428dfe8136ea85c65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  left: 0
-  right: 12.68
-  up: 0
-  down: 0
+  left: -14
+  right: 12
+  up: 9
+  down: -7
 --- !u!4 &1756308959
 Transform:
   m_ObjectHideFlags: 0
