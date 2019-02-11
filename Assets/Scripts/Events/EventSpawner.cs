@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventSpawner : MonoBehaviour {
+public class EventSpawner : Spawner {
 
-    public Boundaries boundaries;
+    
 	// Use this for initialization
 	void Start () {
 		
@@ -15,12 +15,5 @@ public class EventSpawner : MonoBehaviour {
 		
 	}
 
-    void CheckForBoundaries()
-    {
-        
-    }
-    void GetRandomPos()
-    {
-        
-    }
+    
 }
