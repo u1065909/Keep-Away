@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour {
 
     public Boundaries boundaries;
     public float rateOfSpawn;
-    public List<GameObject> spawnedObjects;
+    
 	// Use this for initialization
 	void Start ()
     {
@@ -18,17 +18,22 @@ public class Spawner : MonoBehaviour {
     /// </summary>
     /// <param name="spawnPoint"></param>
     /// <returns></returns>
-    bool CheckForBoundaries(Vector2 spawnPoint,Vector2 size)
+    public bool CheckForBoundaries(Vector2 spawnPoint,Vector2 size)
     {
         return Physics2D.OverlapBox(spawnPoint, size, 0, 1 << LayerMask.NameToLayer("Ground"))|| Physics2D.OverlapBox(spawnPoint, size, 0, 1 << LayerMask.NameToLayer("Wall"));
     }
-    Vector2 GetRandomPos()
+    public Vector2 GetRandomPos()
     {
         return new Vector2(Random.Range(boundaries.left, boundaries.right), Random.Range(boundaries.down, boundaries.up)); 
     }
-    void spawnAtPos(Vector2 spawnPoint,GameObject obj)
+    public GameObject SpawnAtPos(Vector2 spawnPoint,GameObject obj)
     {
-        spawnedObjects.Add(Instantiate(obj, spawnPoint, Quaternion.identity));
+        return Instantiate(obj, spawnPoint, Quaternion.identity);
     }
+
+    
+    
+        
+    
 
 }

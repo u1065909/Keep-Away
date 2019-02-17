@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class GravityFlipped : Events {
 
+    EventSpawner eventSpawner;
     GameObject[] players;
 	// Use this for initialization
 	void Start ()
     {
-        eventName = "GravityFlipped";
+        eventSpawner = FindObjectOfType<EventSpawner>().GetComponent<EventSpawner>();
+        eventName = "Gravity Flipped";
         players = GameObject.FindGameObjectsWithTag("Player");
-	}
+    }
 
     public override void ActivateEvent()
     {
@@ -27,6 +29,8 @@ public class GravityFlipped : Events {
 
     public override void DeactivateEvent()
     {
+        print(eventName);
+        eventSpawner.spawnedEvents.Remove(eventName);
         foreach (GameObject player in players)
         {
             JumpController jump = player.GetComponent<JumpController>();
@@ -34,6 +38,7 @@ public class GravityFlipped : Events {
             jump.jumpForce = jump.jumpForce * -1;
             jump.groundCheck.localPosition = new Vector3(jump.groundCheck.localPosition.x, -1 * jump.groundCheck.localPosition.y, jump.groundCheck.localPosition.z);
             player.GetComponent<Player>().currentEvent = "";
+            DestroyObject(gameObject);
         }
     }
 
@@ -48,6 +53,9 @@ public class GravityFlipped : Events {
         if(collision.gameObject.tag == "Player")
         {
             StartCoroutine(WaitForEventToEnd());
+            GetComponent<BoxCollider2D>().enabled = false;
+            GetComponent<SpriteRenderer>().enabled = false;
+
         }
     }
 }

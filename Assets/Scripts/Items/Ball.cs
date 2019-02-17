@@ -9,8 +9,8 @@ public class Ball : ThrowableItem
     {
         item.name = "Ball";
         item.isBall = true;
-        string[] names = Input.GetJoystickNames();
-        print("Name: " + names[0]);
+        //string[] names = Input.GetJoystickNames();
+        //print("Name: " + names[0]);
     }
     void Update()
     {
