@@ -5,13 +5,13 @@ using UnityEngine;
 public class EventSpawner : Spawner {
 
     public HashSet<string> spawnedEvents = new HashSet<string>();
-    public List<GameObject> events = new List<GameObject>(); 
+    public List<GameObject> events = new List<GameObject>();
     public bool isActive = false;
     public bool allEventsSpawned = false;
 	// Use this for initialization
 	void Start ()
     {
-
+        
     }
 	
 	// Update is called once per frame
@@ -42,19 +42,17 @@ public class EventSpawner : Spawner {
             }
             if (allEventsSpawned)
                 continue;
-            
-            print("Try to Spawn");
-            GameObject eventObj = events[Random.Range(0, events.Count - 1)];
+            GameObject eventObj = events[Random.Range(0, events.Count)];
+            //Change to an event that does not exist in the scene
             while (spawnedEvents.Contains(eventObj.GetComponent<Events>().eventName))
             {
-                eventObj = events[Random.Range(0, events.Count - 1)];
+                eventObj = events[Random.Range(0, events.Count)];
             }
             
             spawnedEvents.Add(eventObj.GetComponent<Events>().eventName);
-            //spawnedEvents.Remove(eventObj.GetComponent<Events>().eventName);
+            //Continually attempt to spawn until valid position is 
             while (!AttemptToSpawn(eventObj))
             {
-
             }
             
         }
@@ -70,6 +68,7 @@ public class EventSpawner : Spawner {
         Vector2 newPos = GetRandomPos();
         if (!CheckForBoundaries(newPos, obj.GetComponent<BoxCollider2D>().size))
         {
+
             print("Instantiated object");
             SpawnAtPos(newPos,obj);
             return true;

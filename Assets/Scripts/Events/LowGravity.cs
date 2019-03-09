@@ -2,39 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GravityFlipped : Events {
-
-	// Use this for initialization
-	void Start ()
+public class LowGravity : Events
+{
+    [Range(0.1f, 1)]
+    public float gravityScale;
+    private float originalScale;
+    // Use this for initialization
+    void Start()
     {
+        
         eventSpawner = FindObjectOfType<EventSpawner>().GetComponent<EventSpawner>();
-        eventName = "Gravity Flipped";
+        eventName = "Low Gravity";
         players = GameObject.FindGameObjectsWithTag("Player");
+        originalScale = players[0].GetComponent<Rigidbody2D>().gravityScale;
     }
-
     public override void ActivateEvent()
     {
-
-        foreach(GameObject player in players)
+        foreach (GameObject player in players)
         {
-            JumpController jump = player.GetComponent<JumpController>();
-            player.GetComponent<Rigidbody2D>().gravityScale = -1 * player.GetComponent<Rigidbody2D>().gravityScale;
-            jump.jumpForce = jump.jumpForce * -1;
-            jump.groundCheck.localPosition = new Vector3(jump.groundCheck.localPosition.x, -1 * jump.groundCheck.localPosition.y, jump.groundCheck.localPosition.z);
+            player.GetComponent<Rigidbody2D>().gravityScale *= gravityScale;
             player.GetComponent<Player>().currentEvent = eventName;
         }
     }
 
     public override void DeactivateEvent()
     {
-        
         eventSpawner.spawnedEvents.Remove(eventName);
         foreach (GameObject player in players)
         {
-            JumpController jump = player.GetComponent<JumpController>();
-            player.GetComponent<Rigidbody2D>().gravityScale = -1 * player.GetComponent<Rigidbody2D>().gravityScale;
-            jump.jumpForce = jump.jumpForce * -1;
-            jump.groundCheck.localPosition = new Vector3(jump.groundCheck.localPosition.x, -1 * jump.groundCheck.localPosition.y, jump.groundCheck.localPosition.z);
+            player.GetComponent<Rigidbody2D>().gravityScale /= gravityScale;
             player.GetComponent<Player>().currentEvent = "";
             DestroyObject(gameObject);
         }
@@ -46,6 +42,8 @@ public class GravityFlipped : Events {
         yield return new WaitForSeconds(duration);
         DeactivateEvent();
     }
+
+
     public override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
